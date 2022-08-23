@@ -30,26 +30,44 @@ public class PortalManager : MonoBehaviour
         }
 
         CurrentCamera = CreateCamera();
+
+        foreach (Portal portal in ListPortals)
+        {
+            portal.CreateMaterial(CurrentCamera);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ControlCamPortals();
-    }
-    public void ControlCamPortals()
-    {
-        foreach (Portal item in ListPortals)
+        foreach (Portal portal in ListPortals)
         {
-            float distance = Vector3.Distance(Player.transform.position, item.transform.position);
+            float distance = Vector3.Distance(Player.transform.position, portal.transform.position);
+
             if (DistanceActivation > distance)
             {
-                CurrentCamera.transform.position = Tools.ConvertLocalPosition(Player.GetFirstPersonCamera().transform.position, item.gameObject, item.Target.gameObject);
-                CurrentCamera.transform.rotation = Tools.ConvertLocalRotation(Player.GetFirstPersonCamera().transform.rotation, item.gameObject, item.Target.gameObject);
+                CurrentCamera.transform.position = Tools.ConvertLocalPosition(Player.GetFirstPersonCamera().transform.position, portal.gameObject, portal.Target.gameObject);
+                CurrentCamera.transform.rotation = Tools.ConvertLocalRotation(Player.GetFirstPersonCamera().transform.rotation, portal.gameObject, portal.Target.gameObject);
+
+
+                if (portal.IsCollisionBox(Player.GetFirstPersonCamera().transform.position))
+                {
+                    if (portal.IsCrossedPortal(Player.GetFirstPersonCamera().transform.position))
+                    {
+                        Player.GetComponent<CharacterController>().enabled = false;
+                        Player.GetComponent<Player>().GetFirstPersonCamera().enabled = false;
+                        Vector3 NewLocation = Tools.ConvertLocalPosition(Player.transform.position, portal.gameObject, portal.Target.gameObject);
+                        Player.transform.position = NewLocation;
+                        Quaternion NewRotation = Tools.ConvertLocalRotation(Player.transform.rotation, portal.gameObject, portal.Target.gameObject);
+                        //Apply new rotation
+                        Player.GetComponent<Player>().GetFirstPersonCamera().SetRotationX(NewRotation.eulerAngles.y);
+                        Player.GetComponent<CharacterController>().enabled = true;
+                    }
+                }
             }
         }
-
     }
+
     public Player GetPlayer()
     {
         return Player;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
@@ -57,4 +58,13 @@ public class FirstPersonCamera : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 1000);
     }
 
+    internal void SetRotationX(float x)
+    {
+        rotationX = x;
+    }
+
+    internal void SetRotationY(float y)
+    {
+        rotationY = y;
+    }
 }
