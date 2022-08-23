@@ -155,9 +155,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 699362595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6111acf61a12fa640923d90fca42c627, type: 3}
+  m_Script: {fileID: 11500000, guid: f8808201e59ac9c41b4d7d6b85c6e86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabCamera: {fileID: 5232247765340564393, guid: b7bccb70b80d73448973adadaafa02cc,
+    type: 3}
+  CurrentCamera: {fileID: 0}
+  DistanceActivation: 20
+  Player: {fileID: 1099406518}
+  ListPortals: []
 --- !u!4 &699362597
 Transform:
   m_ObjectHideFlags: 0
