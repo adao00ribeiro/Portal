@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         RenderPlane = transform.Find("RenderPlane").GetComponent<MeshRenderer>();
         Collider = transform.Find("ColliderPlane").GetComponent<BoxCollider>();
