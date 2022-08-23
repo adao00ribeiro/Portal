@@ -26,6 +26,7 @@ public class FirstPersonCamera : MonoBehaviour
     {
 
         defaultLayer = GetComponent<Camera>().cullingMask;
+        ActiveCursor(false);
     }
     public void ActiveCursor(bool active)
     {
