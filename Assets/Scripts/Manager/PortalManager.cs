@@ -44,11 +44,13 @@ public class PortalManager : MonoBehaviour
         {
             float distance = Vector3.Distance(Player.transform.position, portal.transform.position);
 
+
+
             if (DistanceActivation > distance)
             {
                 CurrentCamera.transform.position = Tools.ConvertLocalPosition(Player.GetFirstPersonCamera().transform.position, portal.gameObject, portal.Target.gameObject);
                 CurrentCamera.transform.rotation = Tools.ConvertLocalRotation(Player.GetFirstPersonCamera().transform.rotation, portal.gameObject, portal.Target.gameObject);
-
+                portal.SetPositionPlayerInMaterial(Player.transform.position);
 
                 if (portal.IsCollisionBox(Player.GetFirstPersonCamera().transform.position))
                 {

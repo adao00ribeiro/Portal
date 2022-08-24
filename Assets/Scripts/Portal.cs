@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +22,14 @@ public class Portal : MonoBehaviour
 
     public void CreateMaterial(Camera currentCamera)
     {
-        RenderPlane.material = new Material(Shader.Find("Unlit/ScreenCutoutShader"));
+        //RenderPlane.material = new Material(Shader.Find("Unlit/ScreenCutoutShader"));
+        RenderPlane.material = new Material(Shader.Find("Shader Graphs/ShaderPortal"));
         RenderPlane.material.mainTexture = currentCamera.targetTexture;
+        RenderPlane.material.SetTexture("_MainTexture", currentCamera.targetTexture);
+    }
+    public void SetPositionPlayerInMaterial(Vector3 positionPlayer)
+    {
+        RenderPlane.material.SetVector("_PlayerPosition", positionPlayer);
     }
     public bool IsCrossedPortal(Vector3 Point)
     {
@@ -38,6 +45,8 @@ public class Portal : MonoBehaviour
         LastInFront = IsInFront;
         return IsCrossing;
     }
+
+
 
     public bool IsCollisionBox(Vector3 Point)
     {
